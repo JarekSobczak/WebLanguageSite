@@ -6,6 +6,6 @@ class HelloService {
      static final String DEFAULT_NAME="World";
 
      String prepareGreetings(String name){
-        return Optional.ofNullable("Hello "+name).orElse(DEFAULT_NAME)+" !";
+        return "Hello "+Optional.ofNullable(name).orElse(DEFAULT_NAME)+" !";
      }
 }
