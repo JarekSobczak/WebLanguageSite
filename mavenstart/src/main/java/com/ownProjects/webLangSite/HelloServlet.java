@@ -15,6 +15,7 @@ import java.util.Optional;
 public class HelloServlet extends HttpServlet {
     private final Logger logger=LoggerFactory.getLogger(HelloServlet.class);
     private static final String NAME_PARAM="name";
+    private static final String LANG_PARAM="lang";
 
     HelloService service;
 
@@ -33,6 +34,6 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Got request with parameter "+req.getParameterMap());
-        resp.getWriter().write(service.prepareGreetings(req.getParameter(NAME_PARAM)));
+        resp.getWriter().write(service.prepareGreetings(req.getParameter(NAME_PARAM),req.getParameter(LANG_PARAM)));
     }
 }
