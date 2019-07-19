@@ -62,6 +62,26 @@ private final static String WELCOME="Hello";
         assertEquals(defaultIdWelcome+" "+HelloService.DEFAULT_NAME+" !",result);
     }
     @Test
+    public void test_nonExistingLang_prepareGreetings_returns_DefaultLangId() throws Exception {
+        //given
+        var defaultIdWelcome="Ciao";
+        var mockRepository=new LangRepository(){
+            @Override
+            Optional<Lang> findById(Long id) {
+                if (id.equals(HelloService.DEFAULT_LANG.getId())){
+                    return Optional.empty();
+                }
+                return Optional.empty();
+            }
+        };
+        var sysUndTEST=new HelloService(mockRepository);
+        String name="test";
+        //when
+        var result=sysUndTEST.prepareGreetings(null,"-1");
+        //then
+        assertEquals(HelloService.DEFAULT_LANG.getMessage()+" "+HelloService.DEFAULT_NAME+" !",result);
+    }
+    @Test
     public void test_textLang_prepareGreetings_returns_DefaultLangId() throws Exception {
         //given
         var defaultIdWelcome="Ciao";
