@@ -7,7 +7,7 @@ import java.util.Optional;
 
 class HelloService {
      static final String DEFAULT_NAME="World";
-     static final Lang DEFAULT_LANG=new Lang(1L,"Hello","en");
+     static final Lang DEFAULT_LANG=new Lang(1,"Hello","en");
     private final Logger logger= LoggerFactory.getLogger(HelloService.class);
      private LangRepository repository;
 
@@ -20,9 +20,9 @@ class HelloService {
     }
 
      String prepareGreetings(String name, String id){
-         Long langId;
+         Integer langId;
          try {
-             langId=Optional.ofNullable(id).map(Long::valueOf).orElse(DEFAULT_LANG.getId());
+             langId=Optional.ofNullable(id).map(Integer::valueOf).orElse(DEFAULT_LANG.getId());
          }catch (NumberFormatException e){
              logger.warn("Non-numeric value is used: "+id);
              langId=DEFAULT_LANG.getId();

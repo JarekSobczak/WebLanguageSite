@@ -1,16 +1,36 @@
 package com.ownProjects.webLangSite;
 
- class Lang {
-    private Long id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "languages")
+class Lang {
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment",strategy = "increment")
+    private Integer id;
     private String message, code;
 
-     public Lang(Long id, String message, String code) {
+    /**
+     *  Hibernate (JPA) uses it !
+     */
+    @SuppressWarnings("unused")
+    public Lang(){
+
+    }
+
+     public Lang(Integer id, String message, String code) {
          this.id = id;
          this.message = message;
          this.code = code;
      }
 
-     public Long getId() {
+     public Integer getId() {
          return id;
      }
 
