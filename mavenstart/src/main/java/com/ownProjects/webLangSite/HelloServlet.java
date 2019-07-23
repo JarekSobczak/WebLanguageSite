@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "HelloServer",urlPatterns = "/api/*")
+@WebServlet(name = "HelloServlet",urlPatterns = "/api")
 public class HelloServlet extends HttpServlet {
     private final Logger logger=LoggerFactory.getLogger(HelloServlet.class);
     private static final String NAME_PARAM="name";
