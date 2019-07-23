@@ -1,0 +1,1 @@
+insert into languages (message,code) values ('Ciao','it');
