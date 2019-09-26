@@ -1,4 +1,4 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Lang;
 
 import org.hibernate.annotations.GenericGenerator;
 

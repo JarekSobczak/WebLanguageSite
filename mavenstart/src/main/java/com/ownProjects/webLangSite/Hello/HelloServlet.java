@@ -1,9 +1,8 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Hello;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +32,15 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+        Integer langId=null;
+        var name=req.getParameter(NAME_PARAM);
+        var lang=req.getParameter(LANG_PARAM);
         logger.info("Got request with parameter "+req.getParameterMap());
-        resp.getWriter().write(service.prepareGreetings(req.getParameter(NAME_PARAM),req.getParameter(LANG_PARAM)));
+        try {
+            langId= Integer.valueOf(lang);
+        }catch (NumberFormatException e){
+            logger.warn("Non-numeric value is used: "+ lang);
+        }
+        resp.getWriter().write(service.prepareGreetings(name,langId));
     }
 }

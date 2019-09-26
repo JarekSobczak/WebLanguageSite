@@ -1,4 +1,6 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Lang;
+
+import com.ownProjects.webLangSite.HibernateUtil;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,7 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Hello;
 
+import com.ownProjects.webLangSite.Lang.Lang;
+import com.ownProjects.webLangSite.Lang.LangRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,14 +21,8 @@ class HelloService {
          this.repository=repository;
     }
 
-     String prepareGreetings(String name, String id){
-         Integer langId;
-         try {
-             langId=Optional.ofNullable(id).map(Integer::valueOf).orElse(DEFAULT_LANG.getId());
-         }catch (NumberFormatException e){
-             logger.warn("Non-numeric value is used: "+id);
-             langId=DEFAULT_LANG.getId();
-         }
+     String prepareGreetings(String name, Integer langId){
+       langId=Optional.ofNullable(langId).orElse(DEFAULT_LANG.getId());
          var message=repository.findById(langId).orElse(DEFAULT_LANG).getMessage();
         return message+" "+Optional.ofNullable(name).orElse(DEFAULT_NAME)+" !";
      }

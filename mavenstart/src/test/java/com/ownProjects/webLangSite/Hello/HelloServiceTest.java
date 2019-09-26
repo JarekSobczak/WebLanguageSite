@@ -1,5 +1,9 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Hello;
 
+import com.ownProjects.webLangSite.Hello.HelloService;
+import com.ownProjects.webLangSite.Lang.Lang;
+import com.ownProjects.webLangSite.Lang.LangRepository;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -22,9 +26,9 @@ public class HelloServiceTest {
         };
         var sysUndTEST = new HelloService(mockRepository);
         // when
-        var result = sysUndTEST.prepareGreetings(null, "-1");
+        var result = sysUndTEST.prepareGreetings(null, -1);
         //then
-        assertEquals(WELCOME + " " + HelloService.DEFAULT_NAME + " !", result);
+        Assert.assertEquals(WELCOME + " " + HelloService.DEFAULT_NAME + " !", result);
     }
 
     @Test
@@ -39,9 +43,9 @@ public class HelloServiceTest {
         var sysUndTEST = new HelloService(mockRepository);
         String name = "test";
         //when
-        var result = sysUndTEST.prepareGreetings(name, "-1");
+        var result = sysUndTEST.prepareGreetings(name, -1);
         //then
-        assertEquals(WELCOME + " " + name + " !", result);
+        Assert.assertEquals(WELCOME + " " + name + " !", result);
     }
 
     @Test
@@ -62,7 +66,7 @@ public class HelloServiceTest {
         //when
         var result = sysUndTEST.prepareGreetings(null, null);
         //then
-        assertEquals(defaultIdWelcome + " " + HelloService.DEFAULT_NAME + " !", result);
+        Assert.assertEquals(defaultIdWelcome + " " + HelloService.DEFAULT_NAME + " !", result);
     }
 
     @Test
@@ -81,29 +85,29 @@ public class HelloServiceTest {
         var sysUndTEST = new HelloService(mockRepository);
         String name = "test";
         //when
-        var result = sysUndTEST.prepareGreetings(null, "-1");
+        var result = sysUndTEST.prepareGreetings(null, -1);
         //then
-        assertEquals(HelloService.DEFAULT_LANG.getMessage() + " " + HelloService.DEFAULT_NAME + " !", result);
+        Assert.assertEquals(HelloService.DEFAULT_LANG.getMessage() + " " + HelloService.DEFAULT_NAME + " !", result);
     }
 
-    @Test
-    public void test_textLang_prepareGreetings_returns_DefaultLangId() throws Exception {
-        //given
-        var defaultIdWelcome = "Ciao";
-        var mockRepository = new LangRepository() {
-            @Override
-            public Optional<Lang> findById(Integer id) {
-                if (id.equals(HelloService.DEFAULT_LANG.getId())) {
-                    return Optional.of(new Lang(null, defaultIdWelcome, null));
-                }
-                return Optional.empty();
-            }
-        };
-        var sysUndTEST = new HelloService(mockRepository);
-        String name = "test";
-        //when
-        var result = sysUndTEST.prepareGreetings(null, "abc");
-        //then
-        assertEquals(defaultIdWelcome + " " + HelloService.DEFAULT_NAME + " !", result);
-    }
+//    @Test
+//    public void test_textLang_prepareGreetings_returns_DefaultLangId() throws Exception {
+//        //given
+//        var defaultIdWelcome = "Ciao";
+//        var mockRepository = new LangRepository() {
+//            @Override
+//            public Optional<Lang> findById(Integer id) {
+//                if (id.equals(HelloService.DEFAULT_LANG.getId())) {
+//                    return Optional.of(new Lang(null, defaultIdWelcome, null));
+//                }
+//                return Optional.empty();
+//            }
+//        };
+//        var sysUndTEST = new HelloService(mockRepository);
+//        String name = "test";
+//        //when
+//        var result = sysUndTEST.prepareGreetings(null, "abc");
+//        //then
+//        Assert.assertEquals(defaultIdWelcome + " " + HelloService.DEFAULT_NAME + " !", result);
+//    }
 }

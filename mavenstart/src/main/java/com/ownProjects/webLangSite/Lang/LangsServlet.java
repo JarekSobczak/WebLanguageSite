@@ -1,4 +1,4 @@
-package com.ownProjects.webLangSite;
+package com.ownProjects.webLangSite.Lang;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ public class LangsServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(LangsServlet.class);
 
 
-    private LangRepository repository;
+    private LangService service;
     private ObjectMapper mapper;
 
     /**
@@ -23,19 +23,19 @@ public class LangsServlet extends HttpServlet {
      */
     @SuppressWarnings("unused")
     public LangsServlet() {
-        this(new LangRepository(), new ObjectMapper());
+        this(new LangService(), new ObjectMapper());
     }
 
     // powyższy konstruktor bezparametrowy dla działania niejawnego servletu, a poniższy dla nas ..
-    LangsServlet(LangRepository repository, ObjectMapper mapper) {
-        this.repository = repository;
+    LangsServlet(LangService service, ObjectMapper mapper) {
+        this.service = service;
         this.mapper = mapper;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         logger.info("Got request with parameter " + req.getParameterMap());
-        mapper.writeValue(resp.getOutputStream(), repository.findAll());
+        mapper.writeValue(resp.getOutputStream(), service.findAll());
         resp.setContentType("application/json;charset=UTF-8");
         // resp.getWriter().write(service.prepareGreetings(req.getParameter(NAME_PARAM),req.getParameter(LANG_PARAM)));
     }
